@@ -1,6 +1,6 @@
 source('dictionary/utilities.R')
 
-# Source: TRUE -- web source has priority. FALSE -- backup source has priority. 
+# Source: TRUE -- web source has priority. FALSE -- backup source has priority.
 src = c('cldr' = FALSE,
         'cow' = FALSE,
         'cow_cs' = FALSE,
@@ -63,7 +63,7 @@ rec = expand.grid('country.name.en.regex' = dat$static$country.name.en.regex,
 panel = c(list(rec), dat[panel_only])
 panel = Reduce(dplyr::left_join, panel) %>%
         dplyr::left_join(cs[, !grepl('^cow|^p4', colnames(cs))])
-     
+
 # English names: Priority ordering
 priority = c('cldr.name.en', 'iso.name.en', 'un.name.en', 'cow.name', 'p4.name', 'country.name.en')
 

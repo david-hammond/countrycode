@@ -5,10 +5,10 @@ get_world_bank = function() {
     download.file(url, filename, quiet = TRUE)
 
     wb <- readxl::read_excel(filename) %>%
-          dplyr::select(3:4) %>%
-          setNames(c('wb.name', 'wb')) %>%
+          dplyr::select(3:4, 6:7) %>%
+          setNames(c('wb.name', 'wb', 'wb.region', 'wb.income')) %>%
           dplyr::mutate(country.name.en.regex = CountryToRegex(wb.name, warn = FALSE)) %>%
-          dplyr::select(country.name.en.regex, wb, wb.name) %>%
+          dplyr::select(country.name.en.regex, wb, wb.name, wb.region, wb.income) %>%
           na.omit
 
     return(wb)
